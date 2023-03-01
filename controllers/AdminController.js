@@ -44,3 +44,27 @@ export const admin_sign_up = asyncHandler(async (req, res) => {
         }
     }
 })
+
+export const admin_sign_in = asyncHandler(async(req, res) => {
+    const {email, password} = req.body
+    const admin = await Admin.findOne({email})
+    if(!admin || !bcrypt.compareSync(password, admin.password)){
+        res.json({error: "email or password is incorrect"})
+    }else{
+        res.json({
+            status: "ok",
+            message: "login successful",
+            data: {
+                _id: admin._id,
+                firstName: admin.firstName,
+                lastName: admin.lastName,
+                password: admin.password,
+                email: admin.email,
+                address: admin.address,
+                postCode: admin.postCode,
+                sector: admin.sector,
+                token: generatetoken(admin._id)
+            }
+        })
+    }
+})

@@ -44,3 +44,27 @@ export const customer_sign_up = asyncHandler(async (req, res) => {
         }
     }
 })
+
+export const customer_sign_in = asyncHandler(async(req, res) => {
+    const {email, password} = req.body
+    const customer = await Customer.findOne({email})
+    if(!customer || !bcrypt.compareSync(password, customer.password)){
+        res.json({error: "email or password is incorrect"})
+    }else{
+        res.json({
+            status: "ok",
+            message: "login successful",
+            data: {
+                _id: customer._id,
+                firstName: customer.firstName,
+                lastName: customer.lastName,
+                password: customer.password,
+                email: customer.email,
+                address: customer.address,
+                postCode: customer.postCode,
+                sector: customer.sector,
+                token: generatetoken(customer._id)
+            }
+        })
+    }
+})
