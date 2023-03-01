@@ -33,7 +33,7 @@ export const admin_sign_up = asyncHandler(async (req, res) => {
                     email: admin.email,
                     address: admin.address,
                     postCode: admin.postCode,
-                    sector: admin,
+                    sector: admin.sector,
                     token: generatetoken(admin._id)
                 }
             })

@@ -13,8 +13,8 @@ export const customer_sign_up = asyncHandler(async (req, res) => {
         postCode,
         sector
     } = req.body
-    const costomerExists = await Customer.find({email:email})
-    if (costomerExists.length > 0){
+    const customerExists = await Customer.find({email:email})
+    if (customerExists.length > 0){
         throw new Error("you have an account already")
     }else{
         const hashedpass = await bcrypt.hash(password, 10)
@@ -33,7 +33,7 @@ export const customer_sign_up = asyncHandler(async (req, res) => {
                     email: customer.email,
                     address: customer.address,
                     postCode: customer.postCode,
-                    sector: customer,
+                    sector: customer.sector,
                     token: generatetoken(customer._id)
                 }
             })
