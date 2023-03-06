@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import bcrypt from "bcryptjs"
 import { generatetoken } from "../utilities/generate_token.js";
 import Admin from "../models/Admin.js";
+import Customer from "../models/Customer.js"
 
 export const admin_sign_up = asyncHandler(async (req, res) => {
     const {
@@ -66,5 +67,78 @@ export const admin_sign_in = asyncHandler(async(req, res) => {
                 token: generatetoken(admin._id)
             }
         })
+    }
+})
+
+export const get_all_customers = asyncHandler(async(req, res) => {
+    const customers = await Customer.find({})
+    res.json({
+        status: "ok",
+        message: "all customers retrieved",
+        data: customers
+    })
+})
+
+export const get_single_customer = asyncHandler(async(req, res) => {
+    const customer = await Customer.findOne({_id: req.params.id})
+    if(customer){
+        res.json({
+            status: "ok",
+            message: "user gotten",
+            data: customer
+        })
+    }else{
+        res.json({message:"something went wrong"})
+    }
+})
+
+export const update_single_customer = asyncHandler(async(req, res) => {
+    const customer = await Customer.findById(req.params.id)
+    const {
+        firstName,
+        lastName,
+        password,
+        email,
+        address,
+        postCode,
+        sector
+    } = req.body
+
+    if (customer){
+        customer.firstName = firstName || customer.firstName
+        customer.lastName = lastName || customer.lastName 
+        customer.password = password || customer.password 
+        customer.email = email || customer.email
+        customer.address =  address || customer.address
+        customer.postCode = postCode || customer.postCode
+        customer.sector = sector || customer.sector
+        
+
+        const updatedcustomer = await customer.save()
+
+        if(updatedcustomer){
+            res.status(201).json({
+                status: "ok",
+                message: "user updated successfully",
+                data: updatedcustomer
+            })
+        }else{
+            res.json({message:"something went wrong"})
+        }
+    }else{
+        res.json({error:"user does not exist"})
+
+    }
+})
+
+export const delete_single_customer = asyncHandler(async(req, res) => {
+    const customer = await Customer.findById(req.params.id)
+    if(customer){
+        res.json({
+            status: "ok",
+            message: "user deleted successfully",
+        })
+    }else{
+        res.json({message: "user not found"})
     }
 })
