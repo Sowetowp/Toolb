@@ -34,8 +34,7 @@ export const admin_sign_up = asyncHandler(async (req, res) => {
                     email: admin.email,
                     address: admin.address,
                     postCode: admin.postCode,
-                    sector: admin.sector,
-                    token: generatetoken(admin._id)
+                    sector: admin.sector
                 }
             })
         }else{
@@ -63,8 +62,7 @@ export const admin_sign_in = asyncHandler(async(req, res) => {
                 email: admin.email,
                 address: admin.address,
                 postCode: admin.postCode,
-                sector: admin.sector,
-                token: generatetoken(admin._id)
+                sector: admin.sector
             }
         })
     }
@@ -132,7 +130,7 @@ export const update_single_customer = asyncHandler(async(req, res) => {
 })
 
 export const delete_single_customer = asyncHandler(async(req, res) => {
-    const customer = await Customer.findById(req.params.id)
+    const customer = await Customer.findByIdAndDelete(req.params.id)
     if(customer){
         res.json({
             status: "ok",

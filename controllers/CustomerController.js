@@ -33,8 +33,7 @@ export const customer_sign_up = asyncHandler(async (req, res) => {
                     email: customer.email,
                     address: customer.address,
                     postCode: customer.postCode,
-                    sector: customer.sector,
-                    token: generatetoken(customer._id)
+                    sector: customer.sector
                 }
             })
         }else{
@@ -62,8 +61,7 @@ export const customer_sign_in = asyncHandler(async(req, res) => {
                 email: customer.email,
                 address: customer.address,
                 postCode: customer.postCode,
-                sector: customer.sector,
-                token: generatetoken(customer._id)
+                sector: customer.sector
             }
         })
     }
