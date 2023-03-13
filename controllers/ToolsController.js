@@ -8,7 +8,7 @@ export const create_tool = asyncHandler(async (req, res) => {
         price,
         availability
     } = req.body
-    const toolExists = await Admin.find({toolName:toolName})
+    const toolExists = await Tools.find({toolName:toolName})
     if (toolExists.length > 0){
         throw new Error("tool name exists aleady")
     }else{
