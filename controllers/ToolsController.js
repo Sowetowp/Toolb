@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import Tools from "../models/Tools";
+import Tools from "../models/Tools.js";
 
 export const create_tool = asyncHandler(async (req, res) => {
     const {
