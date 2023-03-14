@@ -10,8 +10,8 @@ tools_router.route("/available")
     .get(available_tools)
 tools_router.route("/:id")
     .patch(update_tool)
-tools_router.route("/hire")
-    .get(hire_tool)
+tools_router.route("/hire/:id")
+    .post(hire_tool)
 
 
 export default tools_router

@@ -84,9 +84,10 @@ export const update_tool = asyncHandler(async(req, res) => {
 
 export const hire_tool = asyncHandler(async(req, res) => {
     try {
-        const {toolId, firstName, lastName, email, address} = req.body
+        const toolId = await Tools.findById(req.params.id)
+        const {firstName, lastName, email, address} = req.body
         const hiredTool = await Order.create({
-            toolId, firstName, lastName, email, address
+            toolId: toolId.toolName, firstName, lastName, email, address
         })
         if(hiredTool){
             res.status(201).json({
