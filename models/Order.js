@@ -3,8 +3,7 @@ import mongoose from "mongoose";
 const OrderSchema = mongoose.Schema(
     {
         toolId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Tools"
+            type: String
         },
         firstName: {type : String},
         lastName: {type: String},
