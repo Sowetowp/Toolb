@@ -1,4 +1,5 @@
 import asyncHandler from "express-async-handler";
+import Order from "../models/Order.js";
 import Tools from "../models/Tools.js";
 
 export const create_tool = asyncHandler(async (req, res) => {
@@ -78,5 +79,29 @@ export const update_tool = asyncHandler(async(req, res) => {
     }else{
         res.json({error:"tool does not exist"})
 
+    }
+})
+
+export const hire_tool = asyncHandler(async(req, res) => {
+    try {
+        const {toolId, firstName, lastName, email, address} = req.body
+        const hiredTool = await Order.create({
+            toolId, firstName, lastName, email, address
+        })
+        if(hiredTool){
+            res.status(201).json({
+                status: "ok",
+                message: "Tool hired successfully",
+                data: hiredTool
+            })
+        }else{
+            res.json({
+                message: "Error hiring your tool"
+            })
+        }    
+    } catch (error) {
+        res.json({
+            error: error
+        })
     }
 })
