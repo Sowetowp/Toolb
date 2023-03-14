@@ -53,3 +53,30 @@ export const available_tools = asyncHandler(async(req, res) => {
         data: available
     })
 })
+
+export const update_tool = asyncHandler(async(req, res) => {
+    const tool = await Tools.findById(req.params.id)
+    const {
+        availability
+    } = req.body
+
+    if (tool){
+        tool.availability = availability || tool.availability
+        
+
+        const updatedtool = await Tools.save()
+
+        if(updatedtool){
+            res.status(201).json({
+                status: "ok",
+                message: "tool updated successfully",
+                data: updatedtool
+            })
+        }else{
+            res.json({message:"something went wrong"})
+        }
+    }else{
+        res.json({error:"tool does not exist"})
+
+    }
+})
