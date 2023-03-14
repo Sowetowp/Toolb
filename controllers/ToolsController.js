@@ -43,3 +43,13 @@ export const get_all_tools = asyncHandler(async(req, res) => {
         data: tools
     })
 })
+
+export const available_tools = asyncHandler(async(req, res) => {
+    const tools = await Tools.find({})
+    const available = tools.filter((e) => {return e.availability == true})
+    res.json({
+        status: "ok",
+        message: "all tools retrieved",
+        data: available
+    })
+})
