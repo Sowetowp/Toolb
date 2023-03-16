@@ -146,7 +146,7 @@ export const get_all_orders = asyncHandler(async(req, res) => {
     const orders = await Order.find({})
     res.json({
         status: "ok",
-        message: "all customers retrieved",
+        message: "all orders retrieved",
         data: orders
     })
 })

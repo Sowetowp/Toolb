@@ -1,4 +1,5 @@
 import express from "express";
+import { delete_single_order, get_all_orders } from "../controllers/AdminController.js";
 import { available_tools, create_tool, get_all_tools, hire_tool, update_tool } from "../controllers/ToolsController.js";
 
 const tools_router = express.Router()
@@ -12,6 +13,9 @@ tools_router.route("/:id")
     .patch(update_tool)
 tools_router.route("/hire/:id")
     .post(hire_tool)
+    .delete(delete_single_order)
+tools_router.route("/hire")
+    .get(get_all_orders)
 
 
 export default tools_router
