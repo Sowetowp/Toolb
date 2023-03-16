@@ -144,11 +144,15 @@ export const delete_single_customer = asyncHandler(async(req, res) => {
 
 export const get_all_orders = asyncHandler(async(req, res) => {
     const orders = await Order.find({})
-    res.json({
-        status: "ok",
-        message: "all orders retrieved",
-        data: orders
-    })
+    if(orders){
+        res.json({
+            status: "ok",
+            message: "all orders retrieved",
+            data: orders
+        })
+    }else{
+        res.json({message: "orders not found"})
+    }
 })
 
 export const delete_single_order = asyncHandler(async(req, res) => {
