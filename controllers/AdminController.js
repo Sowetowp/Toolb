@@ -141,28 +141,3 @@ export const delete_single_customer = asyncHandler(async(req, res) => {
         res.json({message: "user not found"})
     }
 })
-
-export const get_all_orders = asyncHandler(async(req, res) => {
-    const orders = await Order.find({})
-    if(orders){
-        res.json({
-            status: "ok",
-            message: "all orders retrieved",
-            data: orders
-        })
-    }else{
-        res.json({message: "orders not found"})
-    }
-})
-
-export const delete_single_order = asyncHandler(async(req, res) => {
-    const order = await Order.findByIdAndDelete(req.params.id)
-    if(order){
-        res.json({
-            status: "ok",
-            message: "order deleted successfully",
-        })
-    }else{
-        res.json({message: "order not found"})
-    }
-})
