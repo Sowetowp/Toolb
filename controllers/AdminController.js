@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs"
 // import { generatetoken } from "../utilities/generate_token.js";
 import Admin from "../models/Admin.js";
 import Customer from "../models/Customer.js"
+import Order from "../models/Order.js";
 
 export const admin_sign_up = asyncHandler(async (req, res) => {
     const {
@@ -138,5 +139,26 @@ export const delete_single_customer = asyncHandler(async(req, res) => {
         })
     }else{
         res.json({message: "user not found"})
+    }
+})
+
+export const get_all_orders = asyncHandler(async(req, res) => {
+    const orders = await Order.find({})
+    res.json({
+        status: "ok",
+        message: "all customers retrieved",
+        data: orders
+    })
+})
+
+export const delete_single_order = asyncHandler(async(req, res) => {
+    const order = await Order.findByIdAndDelete(req.params.id)
+    if(order){
+        res.json({
+            status: "ok",
+            message: "order deleted successfully",
+        })
+    }else{
+        res.json({message: "order not found"})
     }
 })
