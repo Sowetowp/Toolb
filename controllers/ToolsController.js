@@ -57,9 +57,6 @@ export const available_tools = asyncHandler(async(req, res) => {
 
 export const update_tool = asyncHandler(async(req, res) => {
     const tool = await Tools.findById(req.params.id)
-    const {
-        availability
-    } = req.body
 
     if (tool){
 
