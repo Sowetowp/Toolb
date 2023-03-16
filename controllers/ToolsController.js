@@ -62,8 +62,8 @@ export const update_tool = asyncHandler(async(req, res) => {
     } = req.body
 
     if (tool){
-        tool.availability = availability || tool.availability
-        
+
+        tool.availability = !tool.availability
 
         const updatedtool = await tool.save()
 
