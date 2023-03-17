@@ -12,9 +12,9 @@ tools_router.route("/:id")
     .patch(update_tool)
 tools_router.route("/hire/:id")
     .post(hire_tool)
-    // .delete(delete_single_order)
-// tools_router.route("/order")
-//     .get(get_all_orders)
+    .delete(delete_single_order)
+tools_router.route("/hire")
+    .get(get_all_orders)
 
 
 export default tools_router
