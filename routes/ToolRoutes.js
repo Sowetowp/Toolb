@@ -1,5 +1,5 @@
 import express from "express";
-import { available_tools, create_tool, get_all_tools, hire_tool, update_tool } from "../controllers/ToolsController.js";
+import { available_tools, create_tool, delete_single_order, get_all_orders, get_all_tools, hire_tool, update_tool } from "../controllers/ToolsController.js";
 
 const tools_router = express.Router()
 
