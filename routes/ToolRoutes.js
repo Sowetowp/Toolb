@@ -13,7 +13,7 @@ tools_router.route("/:id")
 tools_router.route("/hire/:id")
     .post(hire_tool)
     .delete(delete_single_order)
-tools_router.route("/hire")
+tools_router.route("/order")
     .get(get_all_orders)
 
 
